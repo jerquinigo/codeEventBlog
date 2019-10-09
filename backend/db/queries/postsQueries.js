@@ -1,4 +1,4 @@
-const { db } = require('.');
+const { db } = require('../index.js');
 
 const getPostByUserId = ( req, res, next) => {
     let userId = +req.params.user_id;

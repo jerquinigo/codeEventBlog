@@ -15,5 +15,9 @@ getAllThreads = (req, res, next) => {
 		});
 };
 
+// getThreadsByUserId = (req,res,next) => {
+// db.any("SELECT ")
+// }
+
 
 module.exports = {getAllThreads}
