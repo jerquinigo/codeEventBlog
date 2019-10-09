@@ -15,5 +15,12 @@ getAllThreads = (req, res, next) => {
 		});
 };
 
+getThreadsByUserId = (req,res,next) => {
+	let userId = parseInt(req.params.id)
+	console.log(userId)
 
-module.exports = {getAllThreads}
+
+}
+
+
+module.exports = {getAllThreads, getThreadsByUserId}
