@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 
 app.use("/threads", threadsRouter);
+app.use("/posts", postsRouter)
 
 // app.use(function(req, res, next) {
 //   next(createError(404));
