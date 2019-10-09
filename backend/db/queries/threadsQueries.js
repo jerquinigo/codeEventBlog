@@ -17,9 +17,18 @@ getAllThreads = (req, res, next) => {
 
 getThreadsByUserId = (req,res,next) => {
 	let userId = parseInt(req.params.id)
-	console.log(userId)
-
-
+	db.any("SELECT threads.id, threads.threads_code, threads.threads_comment, users.email, users.username, users.profile_pic FROM threads JOIN users on threads.id=users.id WHERE user_id=$1", userId)
+	.then(threads => {
+		res.status(200).json({
+			status: "success",
+			threads: threads,
+			message: "got all threads from userId"
+		})
+	})
+	.catch(err => {
+		console.log(err)
+		return next(err)
+	})
 }
 
 
