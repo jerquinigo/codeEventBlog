@@ -32,4 +32,24 @@ getThreadsByUserId = (req,res,next) => {
 }
 
 
-module.exports = {getAllThreads, getThreadsByUserId}
+deleteThread = (req,res,next) => {
+	let threadId = parseInt(req.params.id)
+	console.log(threadId)
+	db.none("DELETE from threads WHERE id=$1", threadId)
+	.then(result => {
+		res.status(200).json({
+			status: "success",
+			message: "successfully deleted thread",
+			result: result
+		})
+	})
+	.catch(err => {
+		console.log(err)
+		return next(err)
+	})
+}
+
+
+
+
+module.exports = {getAllThreads, getThreadsByUserId, deleteThread}

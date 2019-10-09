@@ -24,7 +24,7 @@ threads_comment TEXT
 
 CREATE TABLE posts(
     id SERIAL PRIMARY KEY,
-    threads_id INT REFERENCES threads(id),
+    threads_id INT REFERENCES threads(id) ON DELETE CASCADE,
     user_id INT REFERENCES users(id),
     posts_code TEXT,
     posts_comment TEXT
@@ -34,7 +34,7 @@ CREATE TABLE likes(
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     posts_id INT REFERENCES posts(id),
-    threads_id INT REFERENCES threads(id)
+    threads_id INT REFERENCES threads(id) ON DELETE CASCADE
 );
 
 
