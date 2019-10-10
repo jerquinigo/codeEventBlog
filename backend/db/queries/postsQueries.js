@@ -1,5 +1,20 @@
 const { db } = require('../index.js');
 
+const getAllPosts = ( req, res, next) => {
+    db.any('SELECT posts.id AS post_id , threads_id, user_id,username, profile_pic, posts_code, posts_comment FROM posts JOIN users ON users.id = posts.user_id')
+    .then(posts => {
+        res.status(200).json({
+            status: "success",
+			posts:posts,
+			message: "Got all posts"
+        })
+    })
+    .catch(err => {
+        console.log(err);
+		return next(err);
+     })
+}
+
 const getPostByUserId = ( req, res, next) => {
     let userId = +req.params.user_id;
     db.any('SELECT posts.id AS post_id , threads_id, user_id,username, profile_pic, posts_code, posts_comment FROM posts JOIN users ON users.id = posts.user_id WHERE user_id = $1',userId)
@@ -16,7 +31,7 @@ const getPostByUserId = ( req, res, next) => {
      })
 }
 const makePostbyUserId = (req, res, next) => {
-    db.none('INSERT INTO posts (threads_id, user_id, posts_code, posts_comment) VALUES(${threads_id},${user_id},${posts_code}, ${posts_comment}) RETURNING id', {
+    db.one('INSERT INTO posts (threads_id, user_id, posts_code, posts_comment) VALUES(${threads_id},${user_id},${posts_code}, ${posts_comment}) RETURNING id', {
         threads_id: req.body.threads_id,
         user_id: req.body.user_id,
         posts_code: req.body.posts_code,
@@ -49,6 +64,7 @@ const deletePost = (req, res, next) => {
   }
 
 module.exports = {
+    getAllPosts,
     getPostByUserId,
     makePostbyUserId,
     deletePost
