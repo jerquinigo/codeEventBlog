@@ -10,8 +10,12 @@ const getAllPosts = ( req, res, next) => {
         })
     })
     .catch(err => {
-        console.log(err);
-		return next(err);
+      res.status(500).json({
+        status:'failed',
+        message:err,
+       
+      })
+      return next(err);
      })
 }
 
@@ -19,15 +23,18 @@ const getPostByUserId = ( req, res, next) => {
     let userId = +req.params.user_id;
     db.any('SELECT posts.id AS post_id , threads_id, user_id,username, profile_pic, posts_code, posts_comment FROM posts JOIN users ON users.id = posts.user_id WHERE user_id = $1',userId)
     .then(posts => {
-        res.status(200).json({
+            res.status(200).json({
             status: "success",
 			posts:posts,
 			message: `got posts from user id: ${userId}`
         })
     })
     .catch(err => {
-        console.log(err);
-		return next(err);
+      res.status(500).json({
+        status:'failed',
+        message:err,
+      })
+		    return next(err);
      })
 }
 const makePostbyUserId = (req, res, next) => {
