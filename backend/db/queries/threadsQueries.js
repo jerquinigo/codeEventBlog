@@ -1,7 +1,7 @@
 const { db } = require("../index.js");
 
 getAllThreads = (req, res, next) => {
-	db.any("SELECT user_id, threads.id AS thread_id, threads_code,threads_comment FROM threads")
+	db.any("SELECT * FROM threads JOIN users on threads.user_id=users.id JOIN posts on posts.user_id = users.id")
 		.then(threads => {
 			res.status(200).json({
 				status: "success",
