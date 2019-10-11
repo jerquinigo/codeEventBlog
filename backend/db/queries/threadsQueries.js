@@ -1,7 +1,7 @@
 const { db } = require("../index.js");
 
 getAllThreads = (req, res, next) => {
-	db.any("SELECT user_id, threads_code,threads_comment FROM threads")
+	db.any("SELECT user_id, threads.id AS thread_id, threads_code,threads_comment FROM threads")
 		.then(threads => {
 			res.status(200).json({
 				status: "success",
@@ -49,7 +49,28 @@ deleteThread = (req,res,next) => {
 	})
 }
 
+createThreadById = (req,res,next) => {
+	// let threadId = parseInt(req.params.id)
+	console.log(threadId)
+	db.none("INSERT INTO threads (user_id, threads_code, threads_comment) VALUES(${user_id}, ${threads_code}, ${threads_comment}) RETURNING id", {
+		user_id: req.body.user_id,
+		threads_code: req.body.threads_code,
+		threads_comment: req.body.threads_comment
+	})
+	.then(threads => {
+		res.status(200).json({
+			status: "success",
+			threads: threads,
+			message: "got threads by id"
+		})
+	})
+	.catch(err => {
+		console.log(err);
+		return next(err)
+	})
+} 
 
 
 
-module.exports = {getAllThreads, getThreadsByUserId, deleteThread}
+
+module.exports = {getAllThreads, getThreadsByUserId, deleteThread, createThreadById}
