@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LoginFrom from './LoginForm'
 
 
 export default class Login extends Component {
@@ -7,6 +8,10 @@ export default class Login extends Component {
 
     }
     render(){
-        return ( <h1>We are going to log in and all that shiz through this</h1>)
+        return ( 
+        <div> 
+            <LoginFrom />
+        </div>
+    )
     }
 };
