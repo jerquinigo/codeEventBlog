@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 //Component Imports
 import Feed from './components/Feed';
 import Login from './components/Login';
+import {PrivateRoute} from './utils/AuthRouting.js'
 
 import './App.css';
 
@@ -17,8 +18,8 @@ class App extends Component {
   return (
     <div className="App">
       <Switch>
-      <Route exact path='/' component={Feed} />
       <Route path='/login' component={Login} />
+      <PrivateRoute exact path="/feed" component={Feed}/>
 
 
       </Switch>
