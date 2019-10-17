@@ -7,7 +7,14 @@ export default class Feed extends Component {
 
     }
     render(){
-        return ( <h1>This b Feed</h1>)
+        return ( 
+        <div className='feed'>
+            <div className='main'>
+                <h1>This b Feed</h1>
+            </div>
+          
+        </div>
+        )
     }
 };
 
