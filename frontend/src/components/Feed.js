@@ -1,21 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
-export default class Feed extends Component {
+export default function Feed () {
 
-    state = {
-
-    }
-    render(){
         return ( 
-        <div className='feed'>
+       <div className='feed'>
             <div className='main'>
                 <h1>This b Feed</h1>
             </div>
           
         </div>
         )
-    }
+
 };
 
 
