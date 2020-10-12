@@ -20,3 +20,5 @@ const SignUpForm = (props) => {
         </div>
     )
 }
+
+export default SignUpForm
