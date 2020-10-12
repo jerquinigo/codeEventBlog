@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 //Component Imports
 import Feed from './components/Feed';
 import Login from './components/Login';
+import SingUp from './components/SignUp';
 import {PrivateRoute} from './utils/AuthRouting.js'
 
 import './App.css';
@@ -14,6 +15,7 @@ export default function App () {
       <div>Hello, Welcome to codeEventBlog (we camelCase in these parts)</div>
       <Switch>
       <Route path='/login' component={Login} />
+      <Route path='/signup' component={SingUp} />
       <PrivateRoute exact path="/feed" component={Feed}/>
 
 
